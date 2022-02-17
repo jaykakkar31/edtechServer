@@ -6,10 +6,10 @@ const { Educator } = require("../models/educator");
 exports.registerEducator = asyncHandler(async (req, res) => {
 	const { email, password, name } = req.body;
 
-	console.log(req.body, "USER");
+	console.log(req.body, "educator");
 
-	const userExist = await Educator.findOne({ email: email });
-	if (userExist) {
+	const educatorExist = await Educator.findOne({ email: email });
+	if (educatorExist) {
 		res.status(401);
 		throw new Error("Educator already exist");
 	} else {
@@ -36,7 +36,7 @@ exports.registerEducator = asyncHandler(async (req, res) => {
 						});
 					} else {
 						res.status(400);
-						throw new Error("User not found");
+						throw new Error("Educator not found");
 					}
 				} else {
 					res.status(400);
@@ -44,5 +44,23 @@ exports.registerEducator = asyncHandler(async (req, res) => {
 				}
 			});
 		});
+	}
+});
+
+exports.loginEducator = asyncHandler(async (req,res) => {
+	const { email, password } = req.body;
+	// console.log(req.body, "AUTH");
+	const educator = await Educator.findOne({ email: email });
+	if (educator && (await bcrypt.compare(password, educator.password))) {
+		res.json({
+			_id: educator._id,
+			name: educator.name,
+			email: educator.email,
+			isAdmin: educator.isAdmin,
+			token: generateToken(educator._id),
+		});
+	} else {
+		res.status(401);
+		throw new Error("Invalid email or password");
 	}
 });

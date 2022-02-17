@@ -37,7 +37,7 @@ exports.registerStudent = asyncHandler(async (req, res) => {
 						});
 					} else {
 						res.status(400);
-						throw new Error("User not found");
+						throw new Error("Student not found");
 					}
 				} else {
 					res.status(400);
@@ -45,5 +45,24 @@ exports.registerStudent = asyncHandler(async (req, res) => {
 				}
 			});
 		});
+	}
+});
+
+
+exports.loginStudent = asyncHandler(async (req,res) => {
+	const { email, password } = req.body;
+	// console.log(req.body, "AUTH");
+	const student = await Student.findOne({ email: email });
+	if (student && (await bcrypt.compare(password, student.password))) {
+		res.json({
+			_id: student._id,
+			name: student.name,
+			email: student.email,
+			isAdmin: student.isAdmin,
+			token: generateToken(student._id),
+		});
+	} else {
+		res.status(401);
+		throw new Error("Invalid email or password");
 	}
 });
