@@ -6,7 +6,6 @@ const { generateToken } = require("../utils/generateToken");
 exports.registerStudent = asyncHandler(async (req, res) => {
 	const { email, password, name } = req.body;
 
-	console.log(req, "USER");
     
 
 	const userExist = await Student.findOne({ email: email });

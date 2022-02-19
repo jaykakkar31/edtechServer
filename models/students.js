@@ -17,9 +17,9 @@ const studentsSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		isAdmin: {
+		isStudent: {
 			type: Boolean,
-			default: false,
+			default: true,
 			required: true,
 		},
 	},
