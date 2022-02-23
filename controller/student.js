@@ -65,3 +65,4 @@ exports.loginStudent = asyncHandler(async (req,res) => {
 		throw new Error("Invalid email or password");
 	}
 });
+
