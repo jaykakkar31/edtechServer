@@ -11,6 +11,7 @@ const { RtcTokenBuilder, RtcRole } = require("agora-access-token");
 const middleware=require("./middleware/agoraMiddleware")
 const educatorRouter = require("./route/educatorRoutes");
 const studentRouter = require("./route/studentsRoutes");
+const path = require("path");
 
 const mongodb = process.env.MONGO_URI;
 app.use(
@@ -42,28 +43,28 @@ app.use(express.json({ limit: "50mb" }));
 // })
 app.use("/api/student", studentRouter);
 app.use("/api/educator", educatorRouter);
-app.get("/api/agora-call/token", middleware, (req, res) => {
-	// res.header("Access-Control-Allow-Origin", "*");
-	const channel = req.query.channel;
-	if (!channel) {
-		return res.status(500).json({ error: "channel name missing" });
-	}
-	let uid = 123456;
-	let role = RtcRole.PUBLISHER;
-	let expireTime = 36000;
-	const currentTime = Math.floor(Date.now() / 1000);
-	const privilegeExpireTime = currentTime + expireTime;
-	const token = RtcTokenBuilder.buildTokenWithUid(
-		"c43ebeb74b734075ac5680368cc49c4c",
-		"6676f052ec63445cb82167ce42442a3d",
-		channel,
-		uid,
-		role,
-		privilegeExpireTime
-	);
-    console.log(token);
-	 res.json({ token: token });
-});
+// app.get("/api/agora-call/token", middleware, (req, res) => {
+// 	// res.header("Access-Control-Allow-Origin", "*");
+// 	const channel = req.query.channel;
+// 	if (!channel) {
+// 		return res.status(500).json({ error: "channel name missing" });
+// 	}
+// 	let uid = 123456;
+// 	let role = RtcRole.PUBLISHER;
+// 	let expireTime = 36000;
+// 	const currentTime = Math.floor(Date.now() / 1000);
+// 	const privilegeExpireTime = currentTime + expireTime;
+// 	const token = RtcTokenBuilder.buildTokenWithUid(
+// 		"c43ebeb74b734075ac5680368cc49c4c",
+// 		"6676f052ec63445cb82167ce42442a3d",
+// 		channel,
+// 		uid,
+// 		role,
+// 		privilegeExpireTime
+// 	);
+//     console.log(token);
+// 	 res.json({ token: token });
+// });
 
 
 app.get("/", (req, res) => {
