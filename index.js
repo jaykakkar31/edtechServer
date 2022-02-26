@@ -12,7 +12,7 @@ const middleware=require("./middleware/agoraMiddleware")
 const educatorRouter = require("./route/educatorRoutes");
 const studentRouter = require("./route/studentsRoutes");
 const path = require("path");
-
+const couseRouter=require("./route/courseRoutes")
 const mongodb = process.env.MONGO_URI;
 app.use(
 	cors({
@@ -43,6 +43,7 @@ app.use(express.json({ limit: "50mb" }));
 // })
 app.use("/api/student", studentRouter);
 app.use("/api/educator", educatorRouter);
+app.use("/api/courses",couseRouter)
 // app.get("/api/agora-call/token", middleware, (req, res) => {
 // 	// res.header("Access-Control-Allow-Origin", "*");
 // 	const channel = req.query.channel;
