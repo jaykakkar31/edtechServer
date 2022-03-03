@@ -1,6 +1,10 @@
 const express=require("express")
 const lectureRouter = express.Router();
-const { addLecture } =require( "../controller/lectures");
+const { addLecture ,getAllLectures} =require( "../controller/lectures");
+const { authProtect } = require("../middleware/educatorAuthMiddleware");
 
-lectureRouter.post("/add",addLecture)
+lectureRouter.post("/add", authProtect, addLecture);
+lectureRouter.get("/get", getAllLectures);
+
+
 module.exports=lectureRouter

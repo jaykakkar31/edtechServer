@@ -41,3 +41,12 @@ exports.addLecture = asyncHandler(async (req, res) => {
 		}
 	}
 });
+
+exports.getAllLectures = asyncHandler(async (req, res) => {
+	try {
+		const lectureList = await Lectures.find({});
+		res.json(lectureList);
+	} catch (e) {
+		throw new Error(e.message);
+	}
+});

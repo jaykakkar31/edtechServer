@@ -4,9 +4,10 @@ const coursesRouter = express.Router();
 
 // const productData = require("../data/product");
 const { addCourse } = require("../controller/course");
+const { authProtect } = require("../middleware/educatorAuthMiddleware");
 //fetch product data from mogodb
 // userRouter.post("/login", authUser);
 // userRouter.get("/profile", authProtect, getUserProfile);
-coursesRouter.post("/add", addCourse);
+coursesRouter.post("/add",authProtect ,addCourse);
 
 module.exports = coursesRouter;
