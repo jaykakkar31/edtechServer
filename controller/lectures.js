@@ -50,3 +50,17 @@ exports.getAllLectures = asyncHandler(async (req, res) => {
 		throw new Error(e.message);
 	}
 });
+
+exports.deleteLectureByMeetingId = asyncHandler(async (req, res) => {
+	try {
+		const lecture = await Lectures.find({ meetingId: req.body.meetingId });
+		if (lecture) {
+			await lecture.remove();
+			res.json({ message: "Lecture is deleted" });
+		}else{
+            throw new Error(e.message)
+        }
+	} catch (e) {
+		throw new Error(e.message);
+	}
+});
