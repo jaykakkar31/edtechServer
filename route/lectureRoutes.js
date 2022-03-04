@@ -5,6 +5,6 @@ const { authProtect } = require("../middleware/educatorAuthMiddleware");
 
 lectureRouter.post("/add", authProtect, addLecture);
 lectureRouter.get("/get", getAllLectures);
-lectureRouter.delete("/deletelecture",deleteLectureByMeetingId)
+lectureRouter.delete("/deletelecture/:id",deleteLectureByMeetingId)
 
 module.exports=lectureRouter
