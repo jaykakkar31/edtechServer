@@ -4,7 +4,18 @@ const { generateToken } = require("../utils/generateToken");
 const { Educator } = require("../models/educator");
 
 exports.registerEducator = asyncHandler(async (req, res) => {
-	const { email, password, name } = req.body;
+	const {
+		email,
+		password,
+		name,
+		userImage,
+		contact,
+		dob,
+		state,
+		city,
+		address,
+		gender,
+	} = req.body;
 
 	console.log(req.body, "educator");
 
@@ -22,6 +33,13 @@ exports.registerEducator = asyncHandler(async (req, res) => {
 						email: email,
 						name: name,
 						password: hash,
+						userImage: userImage,
+						address: address,
+						contact: contact,
+						dob: dob,
+						city: city,
+						state: state,
+                        gender:gender
 					});
 					newEducator.save(() => {
 						console.log("saved");
@@ -32,6 +50,8 @@ exports.registerEducator = asyncHandler(async (req, res) => {
 							name: newEducator.name,
 							email: newEducator.email,
 							isAdmin: newEducator.isAdmin,
+							// userImage: newEducator.userImage,
+
 							token: generateToken(newEducator._id),
 						});
 					} else {
@@ -47,7 +67,7 @@ exports.registerEducator = asyncHandler(async (req, res) => {
 	}
 });
 
-exports.loginEducator = asyncHandler(async (req,res) => {
+exports.loginEducator = asyncHandler(async (req, res) => {
 	const { email, password } = req.body;
 	// console.log(req.body, "AUTH");
 	const educator = await Educator.findOne({ email: email });
@@ -57,6 +77,7 @@ exports.loginEducator = asyncHandler(async (req,res) => {
 			name: educator.name,
 			email: educator.email,
 			isAdmin: educator.isAdmin,
+			// userImage:educator.userImage,
 			token: generateToken(educator._id),
 		});
 	} else {

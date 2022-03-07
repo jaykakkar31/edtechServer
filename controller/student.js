@@ -4,10 +4,20 @@ var bcrypt = require("bcryptjs");
 const { generateToken } = require("../utils/generateToken");
 
 exports.registerStudent = asyncHandler(async (req, res) => {
-	const { email, password, name } = req.body;
-
+	const {
+		email,
+		password,
+		name,
+		userImage,
+		contact,
+		dob,
+		state,
+		city,
+		address,
+		gender,
+	} = req.body;
     
-
+console.log(req.body);
 	const userExist = await Student.findOne({ email: email });
 	if (userExist) {
 		res.status(401);
@@ -22,7 +32,15 @@ exports.registerStudent = asyncHandler(async (req, res) => {
 						email: email,
 						name: name,
 						password: hash,
+						userImage: userImage,
+						address: address,
+						contact: contact,
+						dob: dob,
+						city: city,
+						state: state,
+						gender: gender,
 					});
+                    console.log(newStudent);
 					newStudent.save(() => {
 						console.log("saved");
 					});
@@ -32,6 +50,7 @@ exports.registerStudent = asyncHandler(async (req, res) => {
 							name: newStudent.name,
 							email: newStudent.email,
 							isAdmin: newStudent.isAdmin,
+                            // userImage:newStudent.userImage,
 							token: generateToken(newStudent._id),
 						});
 					} else {
