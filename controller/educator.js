@@ -39,7 +39,7 @@ exports.registerEducator = asyncHandler(async (req, res) => {
 						dob: dob,
 						city: city,
 						state: state,
-                        gender:gender
+						gender: gender,
 					});
 					newEducator.save(() => {
 						console.log("saved");
@@ -83,5 +83,16 @@ exports.loginEducator = asyncHandler(async (req, res) => {
 	} else {
 		res.status(401);
 		throw new Error("Invalid email or password");
+	}
+});
+
+exports.getEducatorDetails = asyncHandler(async(req, res) => {
+    console.log(req.params.id);
+	const user = await Educator.findOne({ _id: req.params.id });
+	if (user) {
+		res.json(user);
+	} else {
+		res.status(401);
+		throw new Error("Educator not found");
 	}
 });

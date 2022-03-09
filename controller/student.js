@@ -85,3 +85,14 @@ exports.loginStudent = asyncHandler(async (req,res) => {
 	}
 });
 
+
+exports.getStudentDetails = asyncHandler(async(req, res) => {
+    console.log(req.params);
+	const user = await Student.findOne({ _id: req.params.id });
+	if (user) {
+		res.json(user);
+	} else {
+		res.status(401);
+		throw new Error("Student not found");
+	}
+});
