@@ -4,13 +4,13 @@ const courseSchema = new mongoose.Schema(
 	{
 		courseName: {
 			type: String,
-			required: true,
+			required: false,
 			trim: true,
 			unique: true,
 		},
 		instructorName: {
 			type: String,
-			required: true,
+			required: false,
 			trim: true,
 		},
 		courseImage: {
@@ -25,13 +25,13 @@ const courseSchema = new mongoose.Schema(
 			trim: true,
 		},
 		price: {
-			required: true,
+			required: false,
 			type: Number,
 			trim: true,
 		},
 		description: {
 			type: String,
-			required: true,
+			required: false,
 			trim: true,
 		},
 		curriculum: {
@@ -50,11 +50,21 @@ const courseSchema = new mongoose.Schema(
 			trim: true,
 		},
 		duration: {
-			type: Number,
+			type: String,
 			required: false,
 			trim: true,
 		},
 		lectures: {
+			type: Number,
+			required: false,
+			trim: true,
+		},
+		type: {
+			type: String,
+			required: false,
+			trim: true,
+		},
+		rating: {
 			type: Number,
 			required: false,
 			trim: true,

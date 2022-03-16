@@ -14,5 +14,7 @@ const {
 educatorRouter.post("/register", registerEducator);
 educatorRouter.post("/login",loginEducator)
 educatorRouter.get("/getdetails/:id",getEducatorDetails)
+educatorRouter.get("/get", getEducatorDetails);
+
 
 module.exports = educatorRouter;

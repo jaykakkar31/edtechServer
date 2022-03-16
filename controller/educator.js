@@ -86,13 +86,22 @@ exports.loginEducator = asyncHandler(async (req, res) => {
 	}
 });
 
-exports.getEducatorDetails = asyncHandler(async(req, res) => {
-    console.log(req.params.id);
+exports.getEducatorDetails = asyncHandler(async (req, res) => {
+	console.log(req.params.id);
 	const user = await Educator.findOne({ _id: req.params.id });
 	if (user) {
 		res.json(user);
 	} else {
 		res.status(401);
 		throw new Error("Educator not found");
+	}
+});
+
+exports.getEducatorList = asyncHandler(async (req, res) => {
+	try {
+		const educatorList = await Educator.find({});
+		res.json(educatorList);
+	} catch (e) {
+		throw new Error(e.message);
 	}
 });

@@ -11,6 +11,7 @@ exports.authProtect = asyncHandler(async (req, res, next) => {
 			// console.log(decoded);
 			//new concept
 			//assigning the value to req.user so that it can be used in protected route
+            // -password means exclude password
 			req.user = await Student.findById(decoded.id).select("-password");
 			// console.log(req.user,"USERR");
 			next();
