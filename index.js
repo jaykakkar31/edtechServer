@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
@@ -14,6 +13,7 @@ const path = require("path");
 const couseRouter=require("./route/courseRoutes")
 const mongodb = process.env.MONGO_URI;
 const lectureRouter=require("./route/lectureRoutes")
+
 app.use(
 	cors({
 		origin: "*",
@@ -41,34 +41,12 @@ app.use(express.json({ limit: "50mb" }));
 //     console.log(req.body);
 //     res.json("reached")
 // })
+
 app.use("/api/student", studentRouter);
 app.use("/api/educator", educatorRouter);
-app.use("/api/courses",couseRouter)
-app.use("/api/lectures",lectureRouter)
-app.use("/api/feedback",feedbackRouter)
-// app.get("/api/agora-call/token", middleware, (req, res) => {
-// 	// res.header("Access-Control-Allow-Origin", "*");
-// 	const channel = req.query.channel;
-// 	if (!channel) {
-// 		return res.status(500).json({ error: "channel name missing" });
-// 	}
-// 	let uid = 123456;
-// 	let role = RtcRole.PUBLISHER;
-// 	let expireTime = 36000;
-// 	const currentTime = Math.floor(Date.now() / 1000);
-// 	const privilegeExpireTime = currentTime + expireTime;
-// 	const token = RtcTokenBuilder.buildTokenWithUid(
-// 		"c43ebeb74b734075ac5680368cc49c4c",
-// 		"6676f052ec63445cb82167ce42442a3d",
-// 		channel,
-// 		uid,
-// 		role,
-// 		privilegeExpireTime
-// 	);
-//     console.log(token);
-// 	 res.json({ token: token });
-// });
-
+app.use("/api/courses", couseRouter)
+app.use("/api/lectures", lectureRouter)
+app.use("/api/feedback", feedbackRouter)
 
 app.get("/", (req, res) => {
 	res.send("Api is running");
