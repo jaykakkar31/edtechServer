@@ -12,7 +12,7 @@ const { authProtect } = require("../middleware/educatorAuthMiddleware");
 // userRouter.post("/login", authUser);
 // userRouter.get("/profile", authProtect, getUserProfile);
 feedbackRouter.post("/add", addFeedback);
-feedbackRouter.get("/getdetails", getFeedbackForInstructor);
+feedbackRouter.get("/getdetails/:userName", getFeedbackForInstructor);
 
 
 module.exports = feedbackRouter;

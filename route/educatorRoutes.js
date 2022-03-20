@@ -7,14 +7,17 @@ const {
 	registerEducator,
 	loginEducator,
 	getEducatorDetails,
+	getEducatorList,
 } = require("../controller/educator");
+
 //fetch product data from mogodb
 // userRouter.post("/login", authUser);
 // userRouter.get("/profile", authProtect, getUserProfile);
+
 educatorRouter.post("/register", registerEducator);
 educatorRouter.post("/login",loginEducator)
 educatorRouter.get("/getdetails/:id",getEducatorDetails)
-educatorRouter.get("/get", getEducatorDetails);
+educatorRouter.get("/get", getEducatorList);
 
 
 module.exports = educatorRouter;

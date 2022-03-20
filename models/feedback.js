@@ -9,15 +9,11 @@ const feedbackSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			trim: true,
-			// unique: true,
 		},
-
 		userName: {
 			type: "String",
 			required: true,
-            unique:true
 		},
-
 		feedback: {
 			type: String,
 			required: false,
